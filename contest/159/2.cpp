@@ -5,7 +5,7 @@ public:
     int now = 0, next = 1;
     vector<string> res{folder[0]};
     while (newt < folder.size()) {
-      if (!substring(folder[now], folder[next])) {
+      if (!subString(folder[now], folder[next])) {
         res.push_back(folder[next]);
         now = next;
       }
@@ -14,7 +14,7 @@ public:
     return res;
   }
 
-  bool substring (string target, string input) {
+  bool subString (string target, string input) {
     for (int i = 0; i < target.size(); i++) {
       if (i > input.length() || target[i] != input[i]) {
         return false;
