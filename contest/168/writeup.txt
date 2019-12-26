@@ -1,0 +1,30 @@
+Rank : 554 / 5525 (第一次破台，紀念一下)
+
+1.
+第一題easy，直接做，比賽的時候還看錯題目多寫了一下...
+複雜度O(n)，n為數字的個數，因為數字有上限，長度複雜度可以看成constant time
+
+2.
+第二題面試好像有遇過類似的...先特判一下vector的個數能不能被整除，不能直接return false
+再來用map去count每一個數字的個數，因為這裡需要順序所以不能用unordered_map，
+接下來traverse map，只要目前entry的個數>0，就看這個數字~數字+k-1是不是都有這麼多數量
+沒有就return false，有就把數量減掉
+如果可以traverse整個map就return true
+複雜度是O(nlogn*k)，n為數字的個數，首先在計算數量時複雜度為O(nlogn)
+假設key都沒有相同，在traverse時最外圈for loop要O(n)，內圈要O(k)，每次查找是O(logn)
+
+3.
+第三題用moving window的概念，以每一個點為起頭，去看minSize~maxSize長度的字串有沒有符合要求
+再用unordered_map去累加數量，同時update frequency
+瞎七八亂做就AC了...
+複雜度是O(n*maxSize)，n為字串總長度，substr沒有算在裡面
+
+4.
+第四題用遞迴實作，想法很直觀因為每次開箱可能會有更多箱子，完全符合遞迴定義
+首先用一個candidate的unordered_set紀錄已經擁有，但目前沒有鑰匙的箱子
+然後traverse一次initialBoxes看能不能開，可以開就跑遞迴，不能開就放candidate
+遞迴則是先把糖果數加上去，再把status設成-1，代表已經開過了
+接下來用這個箱子的鑰匙把可以開的箱子全部打開
+最後就是看這個箱子包含哪些箱子，一樣可以開就跑遞迴，不能開就放candidate
+原function的最後traverse所有箱子，把可以打開而且在candidate裡的箱子(因為順序關係的漏網之魚)加上去
+姑且這樣寫就過了，但為什麼不會漏還沒有想的很懂，複雜度也還沒估
