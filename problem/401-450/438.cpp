@@ -1,6 +1,6 @@
 class Solution {
 public:
-	vector<int> findAnagrams(string s, string p) {
+  vector<int> findAnagrams(string s, string p) {
     vector<int> res;
     int target[26] = {0};
     int now[26] = {0};
