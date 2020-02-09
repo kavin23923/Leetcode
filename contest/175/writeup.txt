@@ -1,0 +1,27 @@
+Rank : 538 / 7826
+
+1.
+第一題很簡單但不小心wa一次
+做法是用一個hash set存出現過的數字
+每一個新數字都去看他的兩倍或是1/2（如果是偶數）有沒有出現過，有就return沒有就放進去
+一開始有想到這個辦法，
+但我選擇先實作sort整個vector（從大到小）再遍歷整個vector，每次只看兩倍有沒有出現過
+但這樣處理負數會有問題
+複雜度是O(n)，n是vector元素的數量
+
+2.
+第二題很簡單，先count第一個字串字符出現的數量
+再去扣掉第二個字串字符相同的部分
+剩下的數量就是全部要換掉的
+複雜度是O(n)，n是字串長度
+
+3.
+第三題題目看超久，但其實實做起來很簡單
+首先我們用一個unordered_map去存每個tweetName，每一個entry各自是一個map
+這個map照時間做排序，並計算數量
+recordTweet()只要對對應的entry做累加的動作
+而getTweetCountsPerFrequency()，首先先看freq的單位是什麼，再造出對應的vector
+最後使用map的lower_bound找到第一個不小於startTime的位置，一直遍歷的endTime就好
+第一個函數複雜度是O(1)，第二個worst case是O(n)，至少是O(logn)，n為recordTweet()的數量
+因為假設start~end都在範圍內，則每一個都要看一次
+
