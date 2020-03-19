@@ -1,0 +1,32 @@
+Rank : 1396 / 10047
+
+1.
+第一題簡單寫，存下每一row最小值跟col最大值
+因為題目說數字是unique，所以最後用一個set對比兩個vector
+只要有重複的就是lucky number
+複雜度是O(mn)
+
+2.
+第二題其實比第一題簡單，要實作一個stack，但有加val的功能
+可以直接把一個vector實作的像stack，從vector後面pop和push東西
+increment直接從vector的頭開始加
+increment的複雜度為O(k)，其他操作都是O(1)
+
+3.
+第三題本來想說是不是要用遞迴直接想辦法rebalance
+最後發現其實可以很簡單
+先inorder traverse把點照順序存下來
+最後再重建一個binary tree
+每次先挑中間的點，再用遞迴建左子樹和右子樹，因為每次都挑中間的點，這樣可以保證一定是balanced tree
+複雜度是O(n)，n是node樹，每一個點在traverse和重建各會看一次
+
+4.
+比賽的時候猜測應該是用dp，但最後寫了一個不是最佳解的greedy
+結果真正的做法真的是greedy...
+想法是照efficiency sort，從最高的開始看，每次抓一個worker，並同時更新總和
+更新的方式是用一個heap，存最大k個speed的worker
+因為efficiency下降但speed總合可能上升，所以最後的乘積可能會更大
+最後一直更新最大值，再mod就是答案
+需要注意的是中間的值都先用long long存，最後再做mod
+如果中途一直做mod更新最佳值，不會是真正的答案，想了很久才想清楚題目要什麼...
+複雜度是O(nlogn+nlogk)
