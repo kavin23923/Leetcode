@@ -1,0 +1,24 @@
+Rank : 904 / 11694
+
+1.
+第一題簡單寫，用一個map存numer和對應的frequency
+最後traverse一次map就可以得到答案，因為map保證數字由小排到大，所以可以直接蓋掉之前的答案
+複雜度O(nlogn)，n為arr的長度，其實複雜度可以降到O(n)，但因為是easy所以簡單寫就好
+
+2.
+第二題完全不知道在幹嘛，一開始一堆人傳錯我也不知道在幹嘛...
+直接用三層for迴圈爆搜所有可能
+複雜度O(n^3)，因為n最大只有200，以Leetcode來說是不會超時的...
+
+3.
+第三題題目稍微花了點時間看懂，首先我們先開兩個unordered_map
+第一個存id -> (string,int)，代表customer對應到checkin的站和時間
+第二個存string -> (int, int)，代表起點終點的字串和對應到總共出現的時間和總次數
+再來對於每個function:
+1. checkIn()簡單的看第一個map有沒有這個id，有的話代表他已經checkin但還沒checkout，直接不理(不確定有沒有這種case)，不然就存下來
+2. checkOut()拿第一個map的entry(拿完就刪掉)，把station的start和end串在一起， 再計算花的時間，拿這個pair更新第二個map
+3. getAverageTime()直接把start和end串在一起，去第二個map找entry，計算總時間除以總次數
+不管是哪個function，複雜度都是O(1)
+
+4.
+
