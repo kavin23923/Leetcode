@@ -1,0 +1,21 @@
+Rank : 2264 / 13036
+
+1.
+第一題直接跑完全部的矩陣，如果queryTime界在start~end之間就累加答案
+複雜度O(n)
+
+2.
+第二題先把原字串拆成子字串，並把第一個子字串的大小變小寫
+再來就用sort和compare function把上述的全部字串做排序，再把所有字串串起來，並把第一個字變成大寫
+複雜度為O(n+mlogm)，n為原本字串長度，m為拆分成的子字串個數
+
+3.
+首先先sort原本的vector to vector，按照內容物的數量由大到小排序
+因為題目保證vector是unique的，所以一定只有小的vector可能為大的subset，兩個一樣大小的絕對不會是subset
+接著我們就traverse大的vector，每一次都檢查當前的vector是不是之前出現過的vector的subset，如果不是就把它放進res vector
+再來就把當前的vector用unordered_set存起來，做為之後比對用
+最後再把答案sort
+複雜度為O(nlogn+n*n*m)，其中n為favoriteCompanies的長度，m為單一favoriteCompanies裡最多的公司數目
+
+4.
+
