@@ -1,0 +1,33 @@
+Rank : x / x
+
+1.
+第一題直接窮舉，對於每一個數字，看所有其他的數字有多少是小於自己的
+複雜度O(n^2)
+
+2.
+第二題瞎七八寫然後就過了...
+對於每一個隊伍，都開一個vector紀錄每個名次得了多少票，這些資訊用一個unordered_map存起來
+接下來，traverse map，並把隊伍名稱跟vector用一個vector<pair<char, vector<int>>>給包起來
+最後用一個cmp sort整個vector，cmp先照擁有的名次排序，如果最後還是一樣，就用字典序排
+最後再traverse一次vector，把隊伍名串在一起就是答案
+複雜度O(nm + mlogm)，n為vote數量，m為隊伍數
+
+3.
+第三題最近才在書上看到
+寫兩個recursion
+第一個為isSubPath，代表從root開始，下面是否有一個subpath和list一樣
+第二個為isSubPathFromRoot，代表一定要用root為開頭，是不是有一條subpath和list一樣
+isSubPath的回傳值為isSubPathFromRoot(root) || (isSubPath(left) || isSubPath(right)，代表用root為開頭或是左右子樹其中一個包含path
+isSubPathFromRoot的回傳值為，自己的值和list的值相同，且左右子樹其中一個滿足isSubPathFromRoot
+兩個遞迴式都需要先特判，如果list為NULL，代表到底了return true，否則如果root為NULL，代表已經沒有多的節點可以用，return false
+複雜度為O(nlogn)，n為節點數，假設是在balance binary tree的情況下，因為每一個點都可能為開始，且每一次都要走樹的高度
+
+4.
+第四題不會做，不然我前三題寫完排名在前1% ...
+方法是用DFS+BFS
+其中DFS就走原本題目給的路徑，也就是不增加額外的cost，且走過的就不再走(因為cost一定只會愈來越大)
+一開始先走一次DFS，把所有可以無痛經過的點都先加進去queue
+再來就是用BFS，對於所有可以到的點，都試走看看所有方向，然後再把這些新的點加進去queue
+每一輪BFS cost都要多1，代表這一輪是改了多少符號才能走到目前的位置
+最後就return最後一格的cost
+複雜度為O(mn)，m和n為原矩陣的大小，因為每一個點只會走一次，且每一個點只會走四個方向
