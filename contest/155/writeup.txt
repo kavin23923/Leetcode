@@ -1,0 +1,31 @@
+Rank : x / x
+
+1.
+這回比賽滿難的，從easy題就感覺到了...
+題目要找任意pair間所有diff最小的
+對於每一個點，和它差距最小的肯定是sort完後相鄰的點
+所以我們先把所有點sort，之後開始看所有相鄰的pair
+如果答案比最佳解好，則把答案vector清空，再加入現在的pair
+如果跟答案一樣好，就加入現在的pair
+複雜度O(nlogn)，n是點的個數
+
+2.
+第二題數學題，有點難...
+最難的大概是要想到構造一個function f，f(k)代表小於等於k有多少ugly number
+那我們就可以用binary search去找這個k，使得k為最小滿足題目n條件的值
+而f可以用排容原理計算，f = #a + #b + #c - #ac - #ab - #bc + #abc
+題目要求是a or b or c，舉例ab就是a和b的最小公倍數，可以用最大公因數來算
+之後就binary search找答案，因為過程中lcm可能會超過int，所以都改成用long long處理
+複雜度O(log2*10^9)，這個數字是題目說的答案最大值
+
+3.
+第三題標準解好像是用disjoint set，但是我不會，用dfs也可以解決
+首先我們要先知道哪些位置彼此可以互換，那我們就可以對這些位置做sort，按照最小的字母序來放
+先把題目的pair存成adjacency list形式，然後開始dfs
+對於還沒走過的點，我們都去找所有相連的點，把index和字符記下來
+跳出dfs之後對所有字符和index sort，然後按照index從小開始放，從字符的頭開始放
+等到所有點都走過，就可以回傳答案了，滿有趣的題目
+複雜度O(nlogn)，因為每個點只會走一次，n是字串長度
+
+4.
+two level topological sort...好麻煩不想想...
