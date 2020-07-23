@@ -1,0 +1,43 @@
+Rank : x / x
+
+1.
+第一題簡單寫，先把題目的transaction parse好
+然後就開始traverse，如果自己本身的amount已經超過1000，就直接判為invalid
+否則我們就拿自己跟其他所有的比較，看是否有出現題目的條件，有也判為invalid
+複雜度O(n^2)，n為transaction數
+
+2.
+第二題是easy，更簡單，先把words裡的字的f(s)都先算好
+方法是用一個map累加每一個字元出現的次數，接下來回傳map begin
+之後對於每一個query，我們也去計算f(s)，然後去看words裡所有f(s)，看有多少比自己大
+放進答案中，最後跑完所有query就是答案
+複雜度是O(mn)，m是query數，n是words數，這裡不計算map累加的時間，因為字串長度都很短，忽略不計
+其實有另一個優化方式，是sort words的f(s)，然後用binary search，可以變成(nlogn + mlogn)
+但反正是easy，我就偷懶了...
+
+3.
+第三題用一個unordered_map去紀錄每一個prefix sum對應的ListNode
+順便多開一個node串在原本的head前面，以防第一個節點也要刪掉，這樣比較容易處理
+之後對於每一個prefix sum，我們去看這個sum有沒有出現過，有的話代表中間的數字加起來為0
+那就把這個sum的node的next設成自己的next，直接跳過中間的數字
+比賽的時候傳錯一次，因為必須把中間跑過的prefix sum拿掉不然會有問題
+但是這樣不好處理，我的做法是把中間所有點的val改成-10000，代表這個點不可用了
+所以在判斷的時候就要多加如果sum出現過且節點的值不等於-10000
+反之我們就把這個sum和node放進去，走完list就可以回傳答案
+複雜度O(n)，因為每個點最多走一次，且每個點最多被改成-10000一次
+
+4.
+第四題要寫一個類似stack的東西，但是push要從最左邊，而pop要從最右邊，且支援pop某一個index
+所以我們需要一個可以保證順序大小的東西，這裡我用map跟set
+map裡面存index和對應的stack(實際上是vector)，usable裡面則是可以使用的stack
+對於push，如果usable是空的(目前沒有可以使用的stack)，那就把map的大小放進去
+因為map是由小放到大，所以map的size就會是下一個一定可以使用的index
+然後我們把usable的頭拿出來，把val放進去對應的stack，並檢查大小是否已經到達限制
+是的話就把它從usable裡面移除
+對於popAtStack，我們先檢查當前位置是否為空，是就返回-1，否則就把vector的尾拿出來，回傳回去
+同時把這個index加進去usable，因為拿出來一個項目後一定是可以使用的stack，如果已經在裡面就沒差
+對於pop，我們從map最後開始檢查，如果是空的就把它移除，找到第一個有內容物的stack
+然後使用上面的popAtStack把東西回傳回去，如果整個map都是空的了，就回傳-1
+對於push，複雜度為O(logn)，對於popAtStack，複雜度也是O(logn)，對於pop，複雜度也是O(logn)
+因為假設push進去n個東西，最多也只會erase n個stack，均攤後複雜度是O(1)
+主要複雜度都來自於set和map的操作，n是放進去的val數量
